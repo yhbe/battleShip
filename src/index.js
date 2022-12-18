@@ -3,7 +3,7 @@ import "./style.css";
 function component() {
   const element = document.createElement("div");
 
-  element.innerHTML = "Hello";
+  element.innerHTML = "Hello HI";
 
   return element;
 }
