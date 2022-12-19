@@ -78,6 +78,9 @@ describe("testing gameboard", () => {
     battleShip.place(2, ["D", "1"], "axisX");
     expect(battleShip.shipsLeft()).toBe(2);
     expect(battleShip.receiveAttack(["E", "1"])).toBe("Hit!");
+    expect(battleShip.receiveAttack(["E", "1"])).toBe(
+      "You played here already"
+    );
     expect(battleShip.activeShips.length).toBe(2);
     expect(battleShip.receiveAttack(["D", "1"])).toBe("Hit!");
     expect(battleShip.shipsLeft()).toBe(1);

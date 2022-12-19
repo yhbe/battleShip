@@ -58,8 +58,18 @@ export function Gameboard() {
   function receiveAttack(coordinate) {
     let [shipLetter, shipNumber] = coordinate;
     let getValue = this.board.get(`${shipLetter}${shipNumber}`);
-    if (getValue.length === 0) return "Miss!";
-    if ((getValue = "Ship Is Here")) {
+    console.log(getValue);
+
+    if (getValue.length === 0) {
+      getValue.push("Miss");
+      return "Miss!";
+    }
+
+    if (getValue[0] === "Miss" || getValue[0] === "Played") {
+      return "You played here already";
+    }
+
+    if (getValue[0] === "Ship Is Here") {
       let activeShipArr = this.activeShips;
       for (let category of activeShipArr) {
         let shipsLocations = category.coordinates;
@@ -72,6 +82,8 @@ export function Gameboard() {
               console.log(activeShipArr, "<== Active ship array");
             }
             console.log(category, "<===");
+            getValue.shift();
+            getValue.push("Played");
             return "Hit!";
           }
         }
