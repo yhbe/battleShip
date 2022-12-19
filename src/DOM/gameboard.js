@@ -7,7 +7,7 @@ export function Gameboard() {
     let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H"];
     let map = new Map();
     for (let elem of alphabet) {
-      for (let i = 0; i < 11; i++) {
+      for (let i = 1; i < 11; i++) {
         map.set(`${elem}${i}`, []);
       }
     }
@@ -30,6 +30,19 @@ export function Gameboard() {
           getValue.push("Ship Is Here");
         } else return null;
       }
+    } else if (axis === "axisX") {
+      let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H"];
+      let arrIndex = alphabet.findIndex((letter) => letter === shipLetter);
+      alphabet = alphabet.slice(arrIndex, Number(length) + Number(arrIndex));
+      if (alphabet.length < length) return null;
+      for (let letter of alphabet) {
+        let getValue = this.board.get(`${letter}${shipNumber}`);
+        if (getValue.length === 0) {
+          results.push(`${letter}${shipNumber}`);
+          getValue.push("Ship Is Here");
+        } else return null;
+      }
+      return results;
     }
 
     createNewShip.coordinates = results;

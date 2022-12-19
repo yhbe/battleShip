@@ -41,13 +41,35 @@ describe("testing gameboard", () => {
     expect(battleShip.place(5, ["A", "10"], "axisY")).toBeNull();
   });
 
-  // test("Can place ship on x axis", () => {
-  //   expect(battleShip.place(5, ["A", "1"], "axisX")).toStrictEqual([
-  //     "A1",
-  //     "B1",
-  //     "C3",
-  //     "D3",
-  //     "E3",
-  //   ]);
-  // });
+  test("Can place ship on x axis", () => {
+    expect(battleShip.place(5, ["A", "1"], "axisX")).toStrictEqual([
+      "A1",
+      "B1",
+      "C1",
+      "D1",
+      "E1",
+    ]);
+  });
+
+  test("Can place ship on x axis", () => {
+    expect(battleShip.place(5, ["D", "1"], "axisX")).toStrictEqual([
+      "D1",
+      "E1",
+      "F1",
+      "G1",
+      "H1",
+    ]);
+  });
+
+  test("Can place ship on x axis", () => {
+    expect(battleShip.place(2, ["D", "1"], "axisX")).toStrictEqual([
+      "D1",
+      "E1",
+    ]);
+  });
+
+  test("Cant place ship over another ship", () => {
+    battleShip.place(2, ["D", "1"], "axisX");
+    expect(battleShip.place(2, ["C", "1"], "axisX")).toBeNull();
+  });
 });
