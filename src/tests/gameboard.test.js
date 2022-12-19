@@ -74,6 +74,15 @@ describe("testing gameboard", () => {
   });
 
   test("receive a coordinate and return if a ship was hit or not", () => {
-    battleShip.place();
+    battleShip.place(2, ["A", "1"], "axisY");
+    battleShip.place(2, ["D", "1"], "axisX");
+    expect(battleShip.shipsLeft()).toBe(2);
+    expect(battleShip.receiveAttack(["E", "1"])).toBe("Hit!");
+    expect(battleShip.activeShips.length).toBe(2);
+    expect(battleShip.receiveAttack(["D", "1"])).toBe("Hit!");
+    expect(battleShip.shipsLeft()).toBe(1);
+    expect(battleShip.receiveAttack(["A", "1"])).toBe("Hit!");
+    expect(battleShip.receiveAttack(["A", "2"])).toBe("Hit!");
+    expect(battleShip.shipsLeft()).toBe(0);
   });
 });
