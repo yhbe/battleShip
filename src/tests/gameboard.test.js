@@ -85,4 +85,10 @@ describe("testing gameboard", () => {
     expect(battleShip.receiveAttack(["A", "2"])).toBe("Hit!");
     expect(battleShip.shipsLeft()).toBe(0);
   });
+
+  test("receive a coordinate and return if a ship was hit or not", () => {
+    battleShip.place(2, ["A", "1"], "axisY");
+    battleShip.place(2, ["D", "1"], "axisX");
+    expect(battleShip.receiveAttack(["B", "4"])).toBe("Miss!");
+  });
 });

@@ -58,6 +58,7 @@ export function Gameboard() {
   function receiveAttack(coordinate) {
     let [shipLetter, shipNumber] = coordinate;
     let getValue = this.board.get(`${shipLetter}${shipNumber}`);
+    if (getValue.length === 0) return "Miss!";
     if ((getValue = "Ship Is Here")) {
       let activeShipArr = this.activeShips;
       for (let category of activeShipArr) {
@@ -71,12 +72,11 @@ export function Gameboard() {
               console.log(activeShipArr, "<== Active ship array");
             }
             console.log(category, "<===");
+            return "Hit!";
           }
         }
       }
-      return "Hit!";
     }
-    return "Hit!";
   }
 
   function shipsLeft() {
