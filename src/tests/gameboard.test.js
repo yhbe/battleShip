@@ -72,4 +72,8 @@ describe("testing gameboard", () => {
     battleShip.place(2, ["D", "1"], "axisX");
     expect(battleShip.place(2, ["C", "1"], "axisX")).toBeNull();
   });
+
+  test("receive a coordinate and return if a ship was hit or not", () => {
+    battleShip.place();
+  });
 });
