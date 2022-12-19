@@ -42,10 +42,10 @@ export function Gameboard() {
           getValue.push("Ship Is Here");
         } else return null;
       }
-      return results;
     }
 
     createNewShip.coordinates = results;
+    console.log(createNewShip);
     return createNewShip.coordinates;
   }
 }
