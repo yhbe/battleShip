@@ -14,21 +14,24 @@ export function Gameboard() {
     return map;
   }
 
-  function place(length, coordinate) {
+  function place(length, coordinate, axis) {
     let [shipLetter, shipNumber] = coordinate;
     let createNewShip = new Ship(length);
     let results = [];
 
-    for (let i = shipNumber; i < Number(shipNumber) + Number(length); i++) {
-      let getValue = this.board.get(`${shipLetter}${i}`);
-      if (getValue === undefined) {
-        return null;
+    if (axis === "axisY") {
+      for (let i = shipNumber; i < Number(shipNumber) + Number(length); i++) {
+        let getValue = this.board.get(`${shipLetter}${i}`);
+        if (getValue === undefined) {
+          return null;
+        }
+        if (getValue.length === 0) {
+          results.push(`${shipLetter}${i}`);
+          getValue.push("Ship Is Here");
+        } else return null;
       }
-      if (getValue.length === 0) {
-        results.push(`${shipLetter}${i}`);
-        getValue.push("Ship Is Here");
-      } else return null;
     }
+
     createNewShip.coordinates = results;
     return createNewShip.coordinates;
   }
