@@ -1,5 +1,11 @@
 export function Ship(length) {
-  return { coordinates: null, length: length, hits: 0, sunk: false, hit };
+  return {
+    coordinates: null,
+    length: length,
+    hits: 0,
+    sunk: false,
+    hit,
+  };
 
   function hit() {
     if (this.hits === length - 1) {
