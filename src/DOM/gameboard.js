@@ -7,6 +7,7 @@ export function Gameboard() {
     receiveAttack,
     activeShips: [],
     shipsLeft,
+    playedMoves: [],
   };
 
   function createBoard(length, coordinate) {
@@ -61,6 +62,7 @@ export function Gameboard() {
     console.log(getValue);
 
     if (getValue.length === 0) {
+      this.playedMoves.push(`${shipLetter}${shipNumber}`);
       getValue.push("Miss");
       return "Miss!";
     }
@@ -82,6 +84,7 @@ export function Gameboard() {
               console.log(activeShipArr, "<== Active ship array");
             }
             console.log(category, "<===");
+            this.playedMoves.push(`${shipLetter}${shipNumber}`);
             getValue.shift();
             getValue.push("Played");
             return "Hit!";
