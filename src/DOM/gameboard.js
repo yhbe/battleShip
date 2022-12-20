@@ -8,6 +8,8 @@ export function Gameboard() {
     activeShips: [],
     shipsLeft,
     playedMoves: [],
+    computerMoves: [],
+    computerAttack,
   };
 
   function createBoard(length, coordinate) {
@@ -59,7 +61,6 @@ export function Gameboard() {
   function receiveAttack(coordinate) {
     let [shipLetter, shipNumber] = coordinate;
     let getValue = this.board.get(`${shipLetter}${shipNumber}`);
-    console.log(getValue);
 
     if (getValue.length === 0) {
       this.playedMoves.push(`${shipLetter}${shipNumber}`);
@@ -81,9 +82,7 @@ export function Gameboard() {
             shipsLocations.splice(shipsLocations.indexOf(location), 1);
             if (shipsLocations.length === 0) {
               category.sunk = true;
-              console.log(activeShipArr, "<== Active ship array");
             }
-            console.log(category, "<===");
             this.playedMoves.push(`${shipLetter}${shipNumber}`);
             getValue.shift();
             getValue.push("Played");
@@ -101,4 +100,36 @@ export function Gameboard() {
     );
     return activeShipsArr.length;
   }
+
+  function computerAttack() {
+    let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H"];
+    let possibleMoves = [];
+
+    for (let elem of alphabet) {
+      for (let i = 1; i < 11; i++) {
+        possibleMoves.push([`${elem}`, `${i}`]);
+      }
+    }
+
+    this.computerMoves.forEach((move) => {
+      possibleMoves = possibleMoves.filter((pmoves) => pmoves !== move);
+    });
+
+    let randomNumber = Math.floor(Math.random() * possibleMoves.length);
+    let move = possibleMoves.at(randomNumber);
+    console.log(randomNumber, "<== Random Number :D");
+    console.log(possibleMoves.at(randomNumber));
+
+    const attack = () => {
+      this.receiveAttack(move);
+    };
+
+    attack();
+
+    return `Computer played ${move}`;
+  }
 }
+
+// this.playedMoves.forEach((move) => {
+//   possibleMoves = possibleMoves.filter((pmoves) => pmoves !== move);
+// });

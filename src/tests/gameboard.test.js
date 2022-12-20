@@ -94,4 +94,9 @@ describe("testing gameboard", () => {
     battleShip.place(2, ["D", "1"], "axisX");
     expect(battleShip.receiveAttack(["B", "4"])).toBe("Miss!");
   });
+
+  test("Gameboard can receive a computerAttack", () => {
+    battleShip.place(2, ["A", "1"], "axisY");
+    expect(battleShip.computerAttack()).toContain("Computer played");
+  });
 });
