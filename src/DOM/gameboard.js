@@ -8,7 +8,7 @@ export function Gameboard() {
     activeShips: [],
     shipsLeft,
     playedMoves: [],
-    computerMoves: [],
+    computerMoves: new Set(),
     computerAttack,
   };
 
@@ -111,25 +111,27 @@ export function Gameboard() {
       }
     }
 
-    this.computerMoves.forEach((move) => {
-      possibleMoves = possibleMoves.filter((pmoves) => pmoves !== move);
+    possibleMoves = possibleMoves.filter((move) => {
+      move = String(move);
+      return !this.computerMoves.has(move);
     });
+
+    if (possibleMoves.length === 0) return "You win!";
 
     let randomNumber = Math.floor(Math.random() * possibleMoves.length);
     let move = possibleMoves.at(randomNumber);
+    this.computerMoves.add(String(move));
     console.log(randomNumber, "<== Random Number :D");
     console.log(possibleMoves.at(randomNumber));
 
     const attack = () => {
       this.receiveAttack(move);
     };
-
     attack();
+    console.log(this.board);
+    console.log(possibleMoves, "Posible moves <==");
+    console.log(this.computerMoves, "computerMoves ending");
 
     return `Computer played ${move}`;
   }
 }
-
-// this.playedMoves.forEach((move) => {
-//   possibleMoves = possibleMoves.filter((pmoves) => pmoves !== move);
-// });
