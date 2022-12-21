@@ -1,5 +1,5 @@
-import { Gameboard } from "../DOM/gameboard";
-import { Ship } from "../DOM/ship";
+import { Gameboard } from "../Components/gameboard";
+import { Ship } from "../Components/ship";
 
 describe("testing gameboard", () => {
   let battleShip;

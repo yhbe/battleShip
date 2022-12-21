@@ -1,4 +1,4 @@
-import { Ship } from "../DOM/ship";
+import { Ship } from "../Components/ship";
 
 describe("ship", () => {
   let destroyer;
