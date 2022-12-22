@@ -1,18 +1,32 @@
+*{
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
 body{
   background-color: rgb(134, 134, 134)
 }
 
-.grid{
+
+.boardcontainer{
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+}
+
+.computergrid,
+.playergrid{
   display: grid;
-  height: 600px;
-  width: 600px;
   background-color: red;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(10, 60px);
   gap: 5px;
 }
 
 .squareDiv{
+  height: 50px;
   background-color: orange;
   font-size: 2rem;
 }
+
 
