@@ -29,7 +29,7 @@ export function Gameboard() {
     this.activeShips.push(createNewShip);
     let results = [];
 
-    if (axis === "axisY") {
+    if (axis === "axisX") {
       for (let i = shipNumber; i < Number(shipNumber) + Number(length); i++) {
         let getValue = this.board.get(`${shipLetter}${i}`);
         if (getValue === undefined) {
@@ -40,7 +40,7 @@ export function Gameboard() {
           getValue.push("Ship Is Here");
         } else return null;
       }
-    } else if (axis === "axisX") {
+    } else if (axis === "axisY") {
       let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H"];
       let arrIndex = alphabet.findIndex((letter) => letter === shipLetter);
       alphabet = alphabet.slice(arrIndex, Number(length) + Number(arrIndex));
