@@ -3,9 +3,9 @@ import { Gameboard } from "../Components/gameboard";
 export function gameLoop() {
   let playerBoard = new Gameboard();
   // let computerBoard = new Gameboard();
-  renderPlayerBoard();
+  placeTheShips(5, "", "xaxis");
 
-  function renderPlayerBoard() {
+  function placeTheShips(length, where, axis) {
     const computerDiv = document.querySelector(".computergrid");
     computerDiv.style.display = "none";
     //add handle computerdiv function toggle!
@@ -14,19 +14,36 @@ export function gameLoop() {
       let squareDiv = document.createElement("div");
       squareDiv.className = `${elem.slice(0, -1)} squareDiv`;
       squareDiv.innerHTML = `${elem.slice(0, -1)}`;
-      squareDiv.addEventListener("click", () => {
-        // console.log(playerBoard.board.get(squareDiv.innerHTML));
+
+      squareDiv.addEventListener("mouseenter", () => {
+        let fakeBoard = new Gameboard();
+
+        let highLight = fakeBoard.place("4", squareDiv.innerHTML, "axisX");
+
+        if (!highLight) {
+          return;
+        }
+
+        highLight.forEach(function placeShip(light) {
+          let a = document.getElementsByClassName(light);
+          a[0].classList.add("active");
+          console.log(a[0]);
+        });
+      });
+
+      squareDiv.onmouseout = function () {
+        let allActive = document.querySelectorAll(".active");
+        allActive.forEach((div) => div.classList.remove("active"));
+      };
+
+      squareDiv.addEventListener("click", (event) => {
+        if (event.target.classList.contains("active")) {
+          playerBoard.place(5, event.target.classList[0], "axisX");
+          console.log(playerBoard.board);
+          console.log(event.target.classList[0], "Jackpot!");
+        }
       });
       div.append(squareDiv);
     }
   }
-
-  // function renderComputerBoard() {
-  //   for (let elem of computerBoard.board) {
-  //     let squareDiv = document.createElement("div");
-  //     squareDiv.className = `${elem.slice(0, -1)} squareDiv`;
-  //     squareDiv.innerHTML = `${elem.slice(0, -1)}`;
-  //     div.append(squareDiv);
-  //   }
-  // }
 }
