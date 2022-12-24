@@ -3,9 +3,9 @@ import { Gameboard } from "../Components/gameboard";
 export function gameLoop() {
   let playerBoard = new Gameboard();
   // let computerBoard = new Gameboard();
-  placeTheShips(5, "", "xaxis");
+  placeTheShips();
 
-  function placeTheShips(length, where, axis) {
+  function placeTheShips() {
     const computerDiv = document.querySelector(".computergrid");
     computerDiv.style.display = "none";
     //add handle computerdiv function toggle!
@@ -38,7 +38,13 @@ export function gameLoop() {
 
       squareDiv.addEventListener("click", (event) => {
         if (event.target.classList.contains("active")) {
-          playerBoard.place(5, event.target.classList[0], "axisX");
+          let a = playerBoard.place(4, event.target.classList[0], "axisX");
+
+          a.forEach(function placeShip(light) {
+            let allShipLocations = document.getElementsByClassName(light);
+            allShipLocations[0].classList.add("activeship");
+          });
+
           console.log(playerBoard.board);
           console.log(event.target.classList[0], "Jackpot!");
         }
