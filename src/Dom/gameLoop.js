@@ -35,37 +35,48 @@ export function gameLoop() {
       });
     }
 
+    function mouseOut() {
+      // squareDiv.forEach((div) =?)
+      let allActive = document.querySelectorAll(".active");
+      allActive.forEach((div) => div.classList.remove("active"));
+    }
+
+    function onClick(event) {
+      if (event.target.classList.contains("active")) {
+        let a = playerBoard.place(length, event.target.classList[0], "axisX");
+
+        a.forEach((shipPart) => {
+          let allShipLocations = document.getElementsByClassName(shipPart);
+          allShipLocations[0].classList.add("activeship");
+        });
+        console.log(playerBoard.board);
+        // removeListener();
+        length = length - 1;
+      }
+      if (length === 0) {
+        removeListener();
+        toggleComputerBoard();
+      }
+    }
+
     squareDiv.forEach((div) => {
       div.addEventListener("mouseenter", mouseEnter);
 
-      div.onmouseout = function () {
-        let allActive = document.querySelectorAll(".active");
-        allActive.forEach((div) => div.classList.remove("active"));
-      };
+      div.addEventListener("mouseout", mouseOut);
 
-      div.addEventListener("click", (event) => {
-        if (event.target.classList.contains("active")) {
-          let a = playerBoard.place(length, event.target.classList[0], "axisX");
-
-          a.forEach((shipPart) => {
-            let allShipLocations = document.getElementsByClassName(shipPart);
-            allShipLocations[0].classList.add("activeship");
-          });
-          console.log(playerBoard.board);
-          // removeListener();
-          length = length - 1;
-        }
-        if (length === 0) {
-          removeListener();
-          toggleComputerBoard();
-        }
-      });
+      div.addEventListener("click", onClick);
     });
+
     function removeListener() {
       let squareDiv = document.querySelectorAll(".squareDiv");
+
       squareDiv.forEach((div) =>
         div.removeEventListener("mouseenter", mouseEnter)
       );
+
+      squareDiv.forEach((div) => div.removeEventListener("mouseout", mouseOut));
+
+      squareDiv.forEach((div) => div.removeEventListener("click", onClick));
     }
 
     function toggleComputerBoard() {
