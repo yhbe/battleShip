@@ -3,12 +3,12 @@ import { Gameboard } from "../Components/gameboard";
 export function gameLoop() {
   let playerBoard = new Gameboard();
   // let computerBoard = new Gameboard();
-  setUpStartBoard();
+  setUpBoard(".playergrid");
   callShip(5);
 
-  function setUpStartBoard() {
+  function setUpBoard(board) {
     //add handle computerdiv function toggle!
-    const div = document.querySelector(".playergrid");
+    const div = document.querySelector(`${board}`);
     for (let elem of playerBoard.board) {
       let squareDiv = document.createElement("div");
       squareDiv.className = `${elem.slice(0, -1)} squareDiv`;
@@ -70,6 +70,8 @@ export function gameLoop() {
       if (length === 0) {
         removeListener();
         toggleComputerBoard();
+        setUpBoard(".computergrid");
+        randomizeComputerGrid();
       }
     }
 
