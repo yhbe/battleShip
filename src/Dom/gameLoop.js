@@ -23,8 +23,15 @@ export function gameLoop() {
     toggleComputerBoard();
 
     function mouseEnter(event) {
+      let [first, second, third] = event.target.innerHTML;
+      if (third === undefined) {
+        third = 0;
+      }
+      let word = [];
+      word.push(first, Number(second) + third);
+      //
       let fakeBoard = new Gameboard();
-      let highLight = fakeBoard.place(length, event.target.innerHTML, "axisX");
+      let highLight = fakeBoard.place(length, word, "axisX");
       if (!highLight) {
         return;
       }
@@ -43,7 +50,14 @@ export function gameLoop() {
 
     function onClick(event) {
       if (event.target.classList.contains("active")) {
-        let a = playerBoard.place(length, event.target.classList[0], "axisX");
+        let [first, second, third] = event.target.classList[0];
+        if (third === undefined) {
+          third = 0;
+        }
+        let word = [];
+        word.push(first, Number(second) + third);
+
+        let a = playerBoard.place(length, word, "axisX");
 
         a.forEach((shipPart) => {
           let allShipLocations = document.getElementsByClassName(shipPart);
