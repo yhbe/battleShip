@@ -3,53 +3,79 @@ import { Gameboard } from "../Components/gameboard";
 export function gameLoop() {
   let playerBoard = new Gameboard();
   // let computerBoard = new Gameboard();
-  placeTheShips();
+  setUpStartBoard();
+  callShip(5);
 
-  function placeTheShips() {
-    const computerDiv = document.querySelector(".computergrid");
-    computerDiv.style.display = "none";
+  function setUpStartBoard() {
     //add handle computerdiv function toggle!
     const div = document.querySelector(".playergrid");
     for (let elem of playerBoard.board) {
       let squareDiv = document.createElement("div");
       squareDiv.className = `${elem.slice(0, -1)} squareDiv`;
       squareDiv.innerHTML = `${elem.slice(0, -1)}`;
+      div.append(squareDiv);
+    }
+  }
 
-      squareDiv.addEventListener("mouseenter", () => {
-        let fakeBoard = new Gameboard();
+  function callShip(length) {
+    if (length === 0) return;
+    let squareDiv = document.querySelectorAll(".squareDiv");
+    toggleComputerBoard();
 
-        let highLight = fakeBoard.place("4", squareDiv.innerHTML, "axisX");
+    function mouseEnter(event) {
+      let fakeBoard = new Gameboard();
+      let highLight = fakeBoard.place(length, event.target.innerHTML, "axisX");
+      if (!highLight) {
+        return;
+      }
 
-        if (!highLight) {
-          return;
-        }
-
-        highLight.forEach(function placeShip(light) {
-          let a = document.getElementsByClassName(light);
-          a[0].classList.add("active");
-          console.log(a[0]);
-        });
+      highLight.forEach((light) => {
+        let a = document.getElementsByClassName(light);
+        a[0].classList.add("active");
       });
+    }
 
-      squareDiv.onmouseout = function () {
+    squareDiv.forEach((div) => {
+      div.addEventListener("mouseenter", mouseEnter);
+
+      div.onmouseout = function () {
         let allActive = document.querySelectorAll(".active");
         allActive.forEach((div) => div.classList.remove("active"));
       };
 
-      squareDiv.addEventListener("click", (event) => {
+      div.addEventListener("click", (event) => {
         if (event.target.classList.contains("active")) {
-          let a = playerBoard.place(4, event.target.classList[0], "axisX");
+          let a = playerBoard.place(length, event.target.classList[0], "axisX");
 
-          a.forEach(function placeShip(light) {
-            let allShipLocations = document.getElementsByClassName(light);
+          a.forEach((shipPart) => {
+            let allShipLocations = document.getElementsByClassName(shipPart);
             allShipLocations[0].classList.add("activeship");
           });
-
           console.log(playerBoard.board);
-          console.log(event.target.classList[0], "Jackpot!");
+          // removeListener();
+          length = length - 1;
+        }
+        if (length === 0) {
+          removeListener();
+          toggleComputerBoard();
         }
       });
-      div.append(squareDiv);
+    });
+    function removeListener() {
+      let squareDiv = document.querySelectorAll(".squareDiv");
+      squareDiv.forEach((div) =>
+        div.removeEventListener("mouseenter", mouseEnter)
+      );
+    }
+
+    function toggleComputerBoard() {
+      const computerDiv = document.querySelector(".computergrid");
+      computerDiv.classList.toggle("hidden");
+      console.log(computerDiv);
+    }
+
+    function computerBoard() {
+      toggleComputerBoard();
     }
   }
 }
