@@ -2,7 +2,7 @@ import { Gameboard } from "../Components/gameboard";
 
 export function gameLoop() {
   let playerBoard = new Gameboard();
-  // let computerBoard = new Gameboard();
+  let computerBoard = new Gameboard();
   setUpBoard(".playergrid");
   callShip(5);
 
@@ -15,6 +15,14 @@ export function gameLoop() {
       squareDiv.innerHTML = `${elem.slice(0, -1)}`;
       div.append(squareDiv);
     }
+  }
+
+  function randomizeComputerGrid() {
+    let computergrid = document.querySelector(".computergrid");
+    computerBoard.randomPlace();
+    computergrid.addEventListener("click", (event) => {
+      console.log(event.target.innerHTML);
+    });
   }
 
   function callShip(length) {
@@ -63,7 +71,6 @@ export function gameLoop() {
           let allShipLocations = document.getElementsByClassName(shipPart);
           allShipLocations[0].classList.add("activeship");
         });
-        console.log(playerBoard.board);
         // removeListener();
         length = length - 1;
       }
@@ -98,7 +105,6 @@ export function gameLoop() {
     function toggleComputerBoard() {
       const computerDiv = document.querySelector(".computergrid");
       computerDiv.classList.toggle("hidden");
-      console.log(computerDiv);
     }
 
     function computerBoard() {

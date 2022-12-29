@@ -10,6 +10,7 @@ export function Gameboard() {
     playedMoves: [],
     computerMoves: new Set(),
     computerAttack,
+    randomPlace,
   };
 
   function createBoard(length, coordinate) {
@@ -121,17 +122,27 @@ export function Gameboard() {
     let randomNumber = Math.floor(Math.random() * possibleMoves.length);
     let move = possibleMoves.at(randomNumber);
     this.computerMoves.add(String(move));
-    console.log(randomNumber, "<== Random Number :D");
-    console.log(possibleMoves.at(randomNumber));
 
     const attack = () => {
       this.receiveAttack(move);
     };
     attack();
-    console.log(this.board);
-    console.log(possibleMoves, "Posible moves <==");
-    console.log(this.computerMoves, "computerMoves ending");
 
     return `Computer played ${move}`;
+  }
+
+  function randomPlace(board) {
+    let length = 5;
+    let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H"];
+    for (let i = 0; i < 6; i++) {
+      let randomLetter = Math.trunc(Math.random() * 8);
+      let random = Math.trunc(Math.random() * 10);
+      let a = this.place(length, [alphabet[randomLetter], random], "axisX");
+      if (a === null) {
+        length++;
+      }
+      length = length - 1;
+      console.log(this.board, "Board <=== Check values here");
+    }
   }
 }
