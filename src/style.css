@@ -50,3 +50,12 @@ body{
 .hidden{
   display: none;
 }
+
+
+.attacked{
+  background-color: black;
+}
+
+.hitship{
+  background-color: red;
+}

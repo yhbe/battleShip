@@ -22,6 +22,11 @@ export function gameLoop() {
     computerBoard.randomPlace();
     computergrid.addEventListener("click", (event) => {
       console.log(event.target.innerHTML);
+      let attack = computerBoard.receiveAttack(event.target.innerHTML);
+      console.log("Attack", attack);
+      if (attack === "Miss!" || attack === "You played here already") {
+        event.target.classList.add("attacked");
+      } else event.target.classList.add("hitship");
     });
   }
 

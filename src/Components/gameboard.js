@@ -62,7 +62,7 @@ export function Gameboard() {
   function receiveAttack(coordinate) {
     let [shipLetter, shipNumber] = coordinate;
     let getValue = this.board.get(`${shipLetter}${shipNumber}`);
-
+    console.log(this.activeShips);
     if (getValue.length === 0) {
       this.playedMoves.push(`${shipLetter}${shipNumber}`);
       getValue.push("Miss");
