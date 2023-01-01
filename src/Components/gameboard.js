@@ -131,18 +131,11 @@ export function Gameboard() {
     return `Computer played ${move}`;
   }
 
-  function randomPlace(board) {
-    let length = 5;
-    let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H"];
-    for (let i = 0; i < 6; i++) {
-      let randomLetter = Math.trunc(Math.random() * 8);
-      let random = Math.trunc(Math.random() * 10);
-      let a = this.place(length, [alphabet[randomLetter], random], "axisX");
-      if (a === null) {
-        length++;
-      }
-      length = length - 1;
-      console.log(this.board, "Board <=== Check values here");
-    }
+  function randomPlace() {
+    this.place(5, ["C", "4"], "axisY");
+    this.place(2, ["A", "1"], "axisY");
+    this.place(3, ["G", "1"], "axisX");
+    this.place(4, ["B", "9"], "axisY");
+    this.place(1, ["H", "9"], "axisX");
   }
 }

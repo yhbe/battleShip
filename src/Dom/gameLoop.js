@@ -21,6 +21,9 @@ export function gameLoop() {
     let computergrid = document.querySelector(".computergrid");
     computerBoard.randomPlace();
     computergrid.addEventListener("click", (event) => {
+      if (computerBoard.shipsLeft() === 0) {
+        return alert("Ships win!");
+      }
       console.log(event.target.innerHTML);
       let attack = computerBoard.receiveAttack(event.target.innerHTML);
       console.log("Attack", attack);
