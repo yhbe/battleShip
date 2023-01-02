@@ -95,11 +95,6 @@ describe("testing gameboard", () => {
     expect(battleShip.receiveAttack(["B", "4"])).toBe("Miss!");
   });
 
-  // test("Gameboard can receive a computerAttack", () => {
-  //   battleShip.place(2, ["A", "1"], "axisY");
-  //   expect(battleShip.computerAttack()).toContain("Computer played");
-  // });
-
   test("Computer will win", () => {
     battleShip.place(2, ["A", "1"], "axisX");
     for (let i = 0; i < 80; i++) {

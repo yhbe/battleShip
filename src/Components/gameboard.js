@@ -57,6 +57,7 @@ export function Gameboard() {
         let getValue = this.board.get(`${letter}${shipNumber}`);
         console.log(getValue, "Get Value <===");
         if (getValue === undefined) {
+          this.activeShips.pop();
           return;
         }
         if (getValue.length === 0) {
@@ -142,7 +143,7 @@ export function Gameboard() {
     };
     attack();
 
-    return `Computer played ${move}`;
+    return `${move}`;
   }
 
   function randomPlace() {

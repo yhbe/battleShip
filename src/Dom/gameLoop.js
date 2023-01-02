@@ -24,13 +24,30 @@ export function gameLoop() {
       if (computerBoard.shipsLeft() === 0) {
         return alert("Ships win!");
       }
+      if (playerBoard.shipsLeft() === 0) {
+        return alert("Ships win!");
+      }
       console.log(event.target.innerHTML);
       let attack = computerBoard.receiveAttack(event.target.innerHTML);
       console.log("Attack", attack);
-      if (attack === "Miss!" || attack === "You played here already") {
+
+      if (attack === "You played here already") {
         event.target.classList.add("attacked");
-      } else event.target.classList.add("hitship");
+      } else if (attack === "Miss!") {
+        event.target.classList.add("attacked");
+        attackPlayer();
+      } else {
+        event.target.classList.add("hitship");
+        attackPlayer();
+      }
     });
+  }
+
+  function attackPlayer(event) {
+    let a = playerBoard.computerAttack();
+    console.log(a, "Computer Attacak!");
+    console.log(typeof a);
+    console.log(playerBoard.board);
   }
 
   function callShip(length) {
@@ -79,7 +96,6 @@ export function gameLoop() {
           let allShipLocations = document.getElementsByClassName(shipPart);
           allShipLocations[0].classList.add("activeship");
         });
-        // removeListener();
         length = length - 1;
       }
       if (length === 0) {
@@ -113,10 +129,6 @@ export function gameLoop() {
     function toggleComputerBoard() {
       const computerDiv = document.querySelector(".computergrid");
       computerDiv.classList.toggle("hidden");
-    }
-
-    function computerBoard() {
-      toggleComputerBoard();
     }
   }
 }
