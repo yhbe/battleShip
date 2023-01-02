@@ -34,24 +34,34 @@ export function Gameboard() {
       for (let i = shipNumber; i < Number(shipNumber) + Number(length); i++) {
         let getValue = this.board.get(`${shipLetter}${i}`);
         if (getValue === undefined) {
+          this.activeShips.pop();
           return null;
         }
         if (getValue.length === 0) {
           results.push(`${shipLetter}${i}`);
           getValue.push("Ship Is Here");
-        } else return null;
+        } else {
+          this.activeShips.pop();
+          return null;
+        }
       }
     } else if (axis === "axisY") {
       let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H"];
       let arrIndex = alphabet.findIndex((letter) => letter === shipLetter);
       alphabet = alphabet.slice(arrIndex, Number(length) + Number(arrIndex));
-      if (alphabet.length < length) return null;
+      if (alphabet.length < length) {
+        this.activeShips.pop();
+        return null;
+      }
       for (let letter of alphabet) {
         let getValue = this.board.get(`${letter}${shipNumber}`);
         if (getValue.length === 0) {
           results.push(`${letter}${shipNumber}`);
           getValue.push("Ship Is Here");
-        } else return null;
+        } else {
+          this.activeShips.pop();
+          return null;
+        }
       }
     }
 
@@ -132,10 +142,22 @@ export function Gameboard() {
   }
 
   function randomPlace() {
-    this.place(5, ["C", "4"], "axisY");
-    this.place(2, ["A", "1"], "axisY");
-    this.place(3, ["G", "1"], "axisX");
-    this.place(4, ["B", "9"], "axisY");
-    this.place(1, ["H", "9"], "axisX");
+    let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H"];
+    let xOrY = ["axisX", "axisY"];
+
+    for (let i = 1; i < 6; i++) {
+      let randomNumber = Math.round(Math.random() * 8);
+      let randomAxis = Math.round(Math.random() * 1);
+      let a = this.place(
+        String(i),
+        [String(`${alphabet[randomNumber]}`), String(`${randomNumber}`)],
+        `${xOrY[randomAxis]}`
+      );
+      console.log(a, i, `${xOrY[randomAxis]}`);
+
+      if (a === null) {
+        i--;
+      }
+    }
   }
 }
