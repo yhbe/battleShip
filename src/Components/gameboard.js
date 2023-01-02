@@ -55,6 +55,10 @@ export function Gameboard() {
       }
       for (let letter of alphabet) {
         let getValue = this.board.get(`${letter}${shipNumber}`);
+        console.log(getValue, "Get Value <===");
+        if (getValue === undefined) {
+          return;
+        }
         if (getValue.length === 0) {
           results.push(`${letter}${shipNumber}`);
           getValue.push("Ship Is Here");
