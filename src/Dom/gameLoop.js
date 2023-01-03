@@ -22,15 +22,11 @@ export function gameLoop() {
     computerBoard.randomPlace();
     computergrid.addEventListener("click", (event) => {
       if (computerBoard.shipsLeft() === 0) {
-        return alert("Ships win!");
+        return alert("Player Wins");
       }
-      if (playerBoard.shipsLeft() === 0) {
-        return alert("Ships win!");
-      }
-      console.log(event.target.innerHTML);
       let attack = computerBoard.receiveAttack(event.target.innerHTML);
-      console.log("Attack", attack);
-
+      console.log(attack, "On ComputerBoard", event.target.innerHTML);
+      console.log(computerBoard.board);
       if (attack === "You played here already") {
         event.target.classList.add("attacked");
       } else if (attack === "Miss!") {
@@ -45,9 +41,13 @@ export function gameLoop() {
 
   function attackPlayer(event) {
     let a = playerBoard.computerAttack();
-    console.log(a, "Computer Attacak!");
-    console.log(typeof a);
-    console.log(playerBoard.board);
+    let letters = a[0] + a[2];
+    if (a[3] !== undefined) letters = letters + a[3];
+    let b = document.querySelector(`.playergrid > .${letters}`);
+    b.style.backgroundColor = "Black";
+    if (playerBoard.shipsLeft() === 0) {
+      return alert("Computer Wins");
+    }
   }
 
   function callShip(length) {

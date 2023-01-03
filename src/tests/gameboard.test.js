@@ -90,9 +90,10 @@ describe("testing gameboard", () => {
   });
 
   test("receive a coordinate and return if a ship was hit or not", () => {
-    battleShip.place(2, ["A", "1"], "axisX");
+    battleShip.place(2, ["A", "10"], "axisY");
     battleShip.place(2, ["D", "1"], "axisY");
     expect(battleShip.receiveAttack(["B", "4"])).toBe("Miss!");
+    expect(battleShip.receiveAttack(["A", "10"])).toBe("Hit!");
   });
 
   test("Computer will win", () => {
