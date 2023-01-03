@@ -45,6 +45,7 @@ export function gameLoop() {
     console.log(a, playerBoard.board.get(`${a}`));
     let b = document.querySelector(`.playergrid > .${a}`);
     b.style.backgroundColor = "Black";
+    b.style.color = "black";
     if (playerBoard.shipsLeft() === 0) {
       return alert("Computer Wins");
     }
@@ -99,6 +100,8 @@ export function gameLoop() {
         length = length - 1;
       }
       if (length === 0) {
+        let lowerText = document.querySelector(".placemessage");
+        lowerText.style.color = "Black";
         removeListener();
         toggleComputerBoard();
         setUpBoard(".computergrid");
