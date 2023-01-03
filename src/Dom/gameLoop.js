@@ -22,7 +22,6 @@ export function gameLoop() {
     computerBoard.randomPlace();
     computergrid.addEventListener("click", (event) => {
       let attack = computerBoard.receiveAttack(event.target.innerHTML);
-      console.log(computerBoard.board);
       if (attack === "You played here already") {
         event.target.classList.add("attacked");
       } else if (attack === "Miss!") {
@@ -42,7 +41,6 @@ export function gameLoop() {
     let a = playerBoard.computerAttack();
     a = a.split(",");
     a = a.join("");
-    console.log(a, playerBoard.board.get(`${a}`));
     let b = document.querySelector(`.playergrid > .${a}`);
     b.style.backgroundColor = "Black";
     b.style.color = "black";
