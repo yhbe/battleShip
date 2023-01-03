@@ -55,7 +55,6 @@ export function Gameboard() {
       }
       for (let letter of alphabet) {
         let getValue = this.board.get(`${letter}${shipNumber}`);
-        console.log(getValue, "Get Value <===");
         if (getValue === undefined) {
           this.activeShips.pop();
           return;
@@ -75,9 +74,11 @@ export function Gameboard() {
   }
 
   function receiveAttack(coordinate) {
-    let [shipLetter, shipNumber] = coordinate;
+    let [shipLetter, shipNumber, shipExtra] = coordinate;
+    if (coordinate.length === 3) {
+      shipNumber = shipNumber += shipExtra;
+    }
     let getValue = this.board.get(`${shipLetter}${shipNumber}`);
-    console.log(this.activeShips);
     if (getValue.length === 0) {
       this.playedMoves.push(`${shipLetter}${shipNumber}`);
       getValue.push("Miss");
@@ -158,9 +159,7 @@ export function Gameboard() {
         [String(`${alphabet[randomNumber]}`), String(`${randomNumber}`)],
         `${xOrY[randomAxis]}`
       );
-      console.log(a, i, `${xOrY[randomAxis]}`);
-
-      if (a === null) {
+      if (a == null) {
         i--;
       }
     }
