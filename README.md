@@ -2,7 +2,7 @@
 
 First project with Test Driven Development
 
-![battleship](https://user-images.githubusercontent.com/101876022/227654712-eec4e42d-5f82-45fd-b719-6ab44cc3f80c.png)
+![battleship](https://user-images.githubusercontent.com/101876022/227654774-8389b192-8d31-4107-b15e-fd6601ae2724.png)
 
 
 # Features
