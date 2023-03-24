@@ -2,7 +2,7 @@
 
 First project with Test Driven Development
 
-![Screenshot from 2023-03-24 18-25-56](https://user-images.githubusercontent.com/101876022/227654452-fe12113a-e63f-44da-a762-cbf272ba5ccd.png)
+![battleship](https://user-images.githubusercontent.com/101876022/227654712-eec4e42d-5f82-45fd-b719-6ab44cc3f80c.png)
 
 
 # Features
